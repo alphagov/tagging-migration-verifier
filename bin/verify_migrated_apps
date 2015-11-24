@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/tagging_sync_verifier'
+
+MIGRATED_APPS = %w[
+  smartanswers
+]
+
+MIGRATED_APPS.each do |app_name|
+  TaggingSyncVerifier.new(app_name).verify_taggings_are_in_sync
+end
