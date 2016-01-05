@@ -3,6 +3,10 @@
 require_relative '../lib/tagging_sync_verifier'
 
 MIGRATED_APPS = %w[
+  business-support-finder
+  calculators
+  calendars
+  licence-finder
   smartanswers
 ]
 
