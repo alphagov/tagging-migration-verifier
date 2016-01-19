@@ -17,7 +17,6 @@ class TaggingSyncVerifier
 
     if comparison.same?
       puts "Taggings for #{app_name} are in sync!"
-      exit(0)
     else
       puts "Taggings for #{app_name} are not in sync!"
       puts comparison.diffs
