@@ -8,6 +8,7 @@ MIGRATED_APPS = %w[
   calendars
   licencefinder
   smartanswers
+  policy-publisher
 ]
 
 MIGRATED_APPS.each do |app_name|
