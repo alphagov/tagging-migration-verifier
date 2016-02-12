@@ -1,3 +1,5 @@
+require 'http'
+
 class Download
   def self.taggings_from(service, app_name)
     # In tasks run by Jenkins, GOVUK_APP_DOMAIN will be available and point to the
@@ -9,9 +11,14 @@ class Download
     end
 
     url = "#{host}/debug/taggings-per-app.json?app=#{app_name}"
-    JSON.parse(`curl -s #{url}`)
-  rescue JSON::ParserError
-    puts "Error running the verifier. Probably a connection error occured."
-    exit(1)
+    response = HTTP.get(url)
+    unless response.code == 200
+      puts "Error GET #{url}"
+      puts "#{response.inspect}"
+      puts "#{response}"
+      exit(1)
+    end
+
+    JSON.parse(response.body)
   end
 end
