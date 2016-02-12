@@ -11,15 +11,17 @@ class TaggingSyncVerifier
   end
 
   def verify_taggings_are_in_sync
+    puts "\n\nChecking #{app_name}"
+
     comparison = Comparer.new(
       Download.taggings_from('contentapi', app_name),
       Download.taggings_from('content-store', app_name)
     )
 
     if comparison.same?
-      puts "Taggings for #{app_name} are in sync!"
+      puts "Taggings are in sync!"
     else
-      puts "** Taggings for #{app_name} are not in sync! **"
+      puts "** Taggings are not in sync! **"
 
       comparison.diffs[:only_a].each do |content_id, tags|
         puts "#{content_id} has the following tags in content-api:"
