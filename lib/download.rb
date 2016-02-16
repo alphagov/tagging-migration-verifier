@@ -11,6 +11,8 @@ class Download
     end
 
     url = "#{host}/debug/taggings-per-app.json?app=#{app_name}"
+    puts "Downloading #{url}"
+
     response = HTTP.get(url)
     unless response.code == 200
       puts "Error GET #{url}"
