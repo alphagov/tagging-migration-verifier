@@ -1,20 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.4.0)
     awesome_print (1.6.1)
     diff-lcs (1.2.5)
-    domain_name (0.5.20160128)
-      unf (>= 0.0.5, < 1.0.0)
-    http (1.0.2)
-      addressable (~> 2.3)
-      http-cookie (~> 1.0)
-      http-form_data (~> 1.0.1)
-      http_parser.rb (~> 0.6.0)
-    http-cookie (1.0.2)
-      domain_name (~> 0.5)
-    http-form_data (1.0.1)
-    http_parser.rb (0.6.0)
+    paint (1.0.1)
+    restclient (0.11.3)
+      paint (~> 1.0)
+    retries (0.0.5)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -28,17 +20,15 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   awesome_print
-  http
+  restclient (~> 0.11.3)
+  retries (~> 0.0.5)
   rspec
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
