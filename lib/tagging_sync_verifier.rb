@@ -1,5 +1,5 @@
 require 'json'
-require 'ap'
+require 'awesome_print'
 require_relative '../lib/comparer'
 require_relative '../lib/download'
 
@@ -13,9 +13,22 @@ class TaggingSyncVerifier
   def verify_taggings_are_in_sync
     puts "\n\nChecking #{app_name}"
 
+    from_content_api = Download.taggings_from('contentapi', app_name)
+    from_content_store = Download.taggings_from('content-store', app_name)
+
+    if app_name == 'travel-advice-publisher'
+      from_content_store.each do |content_id, links|
+        from_content_store[content_id].delete('parent')
+      end
+
+      from_content_api.each do |content_id, links|
+        from_content_api[content_id].delete('parent')
+      end
+    end
+
     comparison = Comparer.new(
-      Download.taggings_from('contentapi', app_name),
-      Download.taggings_from('content-store', app_name)
+      from_content_api,
+      from_content_store
     )
 
     if comparison.same?
