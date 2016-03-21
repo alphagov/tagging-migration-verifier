@@ -8,6 +8,7 @@ MIGRATED_APPS = %w[
   calendars
   licencefinder
   smartanswers
+  tariff
   travel-advice-publisher
 ]
 
