@@ -1,10 +1,14 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.4.0)
     awesome_print (1.6.1)
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
     diff-lcs (1.2.5)
     domain_name (0.5.20160128)
       unf (>= 0.0.5, < 1.0.0)
+    hashdiff (0.2.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     mime-types (2.99)
@@ -27,9 +31,14 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    safe_yaml (1.0.4)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    webmock (1.22.6)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff
 
 PLATFORMS
   ruby
@@ -39,6 +48,7 @@ DEPENDENCIES
   rest-client (~> 1.8)
   retries (~> 0.0.5)
   rspec
+  webmock
 
 BUNDLED WITH
    1.11.2
