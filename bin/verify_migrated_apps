@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/tagging_sync_verifier'
+require 'awesome_print'
 
 MIGRATED_APPS = %w[
   businesssupportfinder
@@ -13,5 +14,8 @@ MIGRATED_APPS = %w[
 ]
 
 MIGRATED_APPS.each do |app_name|
-  TaggingSyncVerifier.new(app_name).verify_taggings_are_in_sync
+  verifier = TaggingSyncVerifier.new(app_name)
+  verifier.verify_taggings_are_in_sync
+  ap verifier.output
+  exit(1) if verifier.error
 end
