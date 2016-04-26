@@ -11,7 +11,7 @@ if ARGV.length < 1
   exit 1
 end
 
-connection = PG.connect(ENV["DATABASE_URL"] || 'postgresql:///publishing_api_development')
+BATCH_SIZE = 20_000
 
 query = <<-QUERY
 SELECT
@@ -35,13 +35,24 @@ FROM
 
   group by content.content_id, locations.base_path, content.publishing_app, links.link_type
   order by content.publishing_app, content.content_id, links.link_type
+
+  LIMIT $1 OFFSET $2
 QUERY
 
-CSV.open(ARGV.first, 'wb') do |csv|
-  results = connection.exec(query)
-  puts "#{results.ntuples} rows found"
+connection = PG.connect(ENV["DATABASE_URL"] || 'postgresql:///publishing_api_development')
+connection.prepare("publishing_api_results", query)
 
-  results.each_row do |row|
-    csv << row
+puts "Fetching data from publishing api..."
+CSV.open(ARGV.first, 'wb') do |csv|
+  0.step do |page_number|
+    offset = page_number * BATCH_SIZE
+    results = connection.exec_prepared("publishing_api_results", [BATCH_SIZE, offset])
+    puts "#{results.ntuples} rows found"
+
+    results.each_row do |row|
+      csv << row
+    end
+
+    break if results.ntuples < BATCH_SIZE
   end
 end
