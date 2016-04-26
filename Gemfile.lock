@@ -13,7 +13,6 @@ GEM
       domain_name (~> 0.5)
     mime-types (2.99)
     netrc (0.11.0)
-    pg (0.18.4)
     rest-client (1.8.0)
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
@@ -46,7 +45,6 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
-  pg
   rest-client (~> 1.8)
   retries (~> 0.0.5)
   rspec
